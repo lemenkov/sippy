@@ -35,6 +35,7 @@ from hashlib import md5
 from traceback import print_exc
 from time import time
 import sys, socket
+from twisted.python import log
 
 class NETS_1918(object):
     nets = (('10.0.0.0', 0xffffffffl << 24), ('172.16.0.0',  0xffffffffl << 20), ('192.168.0.0', 0xffffffffl << 16))
@@ -193,7 +194,7 @@ class SipTransactionManager(object):
         if len(data) < 32:
             return
         rtime = time()
-        self.global_config['_sip_logger'].write('RECEIVED message from %s:%d:\n' % address, data, ltime = rtime)
+        log.msg('RECEIVED message from %s:%d:\n' % address, data, ltime = rtime)
         checksum = md5(data).digest()
         retrans = self.l1rcache.get(checksum, None)
         if retrans == None:
@@ -655,6 +656,6 @@ class SipTransactionManager(object):
 
     def transmitData(self, userv, data, address, cachesum = None):
         userv.send_to(data, address)
-        self.global_config['_sip_logger'].write('SENDING message to %s:%d:\n' % address, data)
+        log.msg('SENDING message to %s:%d:\n' % address, data)
         if cachesum != None:
             self.l1rcache[cachesum] = (userv, data, address)
