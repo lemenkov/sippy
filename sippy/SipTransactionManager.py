@@ -194,7 +194,7 @@ class SipTransactionManager(object):
         if len(data) < 32:
             return
         rtime = time()
-        log.msg('RECEIVED message from %s:%d:\n' % address, data, ltime = rtime)
+        log.msg('RECEIVED message from %s:%d:\n%s' % (address[0], address[1], repr(data).replace('\\r\\n', '\r\n')), ltime = rtime)
         checksum = md5(data).digest()
         retrans = self.l1rcache.get(checksum, None)
         if retrans == None:
@@ -656,6 +656,6 @@ class SipTransactionManager(object):
 
     def transmitData(self, userv, data, address, cachesum = None):
         userv.send_to(data, address)
-        log.msg('SENDING message to %s:%d:\n' % address, data)
+        log.msg('SENDING message to %s:%d:\n%s' % (address[0], address[1], repr(data).replace('\\r\\n', '\r\n')))
         if cachesum != None:
             self.l1rcache[cachesum] = (userv, data, address)
