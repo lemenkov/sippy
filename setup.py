@@ -32,7 +32,4 @@ setup(name = 'sippy',
   author = 'Sippy Software, Inc.',
   author_email = 'sales@sippysoft.com',
   url = 'http://www.b2bua.org/',
-  packages = ['sippy'],
-  scripts = ['sippy/b2bua_radius.py', 'sippy/b2bua_simple.py'],
-  data_files = [('etc/sippy', ['sippy/dictionary']),
-                ('share/doc/sippy', ['COPYING'])])
+  packages = ['sippy'])
