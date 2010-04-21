@@ -163,19 +163,19 @@ class UA(object):
         self.update_ua(resp)
         code, reason = resp.getSCode()
         cseq, method = resp.getHFBody('cseq').getCSeq()
-        if method == 'INVITE' and self.reqs.has_key(cseq) and code == 401 and resp.countHFs('www-authenticate') != 0 and \
+        if self.reqs.has_key(cseq) and code == 401 and resp.countHFs('www-authenticate') != 0 and \
           self.username != None and self.password != None and self.reqs[cseq].countHFs('authorization') == 0:
             challenge = resp.getHFBody('www-authenticate')
-            req = self.genRequest('INVITE', self.lSDP, challenge.getNonce(), challenge.getRealm())
+            req = self.genRequest(method, self.lSDP, challenge.getNonce(), challenge.getRealm())
             self.lCSeq += 1
             self.tr = self.global_config['_sip_tm'].newTransaction(req, self.recvResponse, \
               laddress = self.source_address)
             del self.reqs[cseq]
             return None
-        if method == 'INVITE' and self.reqs.has_key(cseq) and code == 407 and resp.countHFs('proxy-authenticate') != 0 and \
+        if self.reqs.has_key(cseq) and code == 407 and resp.countHFs('proxy-authenticate') != 0 and \
           self.username != None and self.password != None and self.reqs[cseq].countHFs('proxy-authorization') == 0:
             challenge = resp.getHFBody('proxy-authenticate')
-            req = self.genRequest('INVITE', self.lSDP, challenge.getNonce(), challenge.getRealm(), SipProxyAuthorization)
+            req = self.genRequest(method, self.lSDP, challenge.getNonce(), challenge.getRealm(), SipProxyAuthorization)
             self.lCSeq += 1
             self.tr = self.global_config['_sip_tm'].newTransaction(req, self.recvResponse, \
               laddress = self.source_address)
