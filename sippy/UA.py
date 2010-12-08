@@ -30,7 +30,7 @@ from SipRequest import SipRequest
 from SipContentType import SipContentType
 from SipProxyAuthorization import SipProxyAuthorization
 from CCEvents import CCEventTry, CCEventFail, CCEventDisconnect, CCEventInfo
-from hashlib import md5
+from md5 import md5
 from random import random
 from time import time
 from Timeout import TimeoutAbs

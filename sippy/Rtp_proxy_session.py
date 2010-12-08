@@ -24,7 +24,7 @@
 
 from SdpOrigin import SdpOrigin
 
-from hashlib import md5
+from md5 import md5
 from random import random
 from time import time
 from datetime import datetime

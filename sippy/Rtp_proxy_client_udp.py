@@ -26,7 +26,7 @@ from Timeout import Timeout
 from Udp_server import Udp_server
 
 from time import time
-from hashlib import md5
+from md5 import md5
 from random import random
 
 class Rtp_proxy_client_udp(object):

@@ -31,7 +31,7 @@ from SipAddress import SipAddress
 from SipRoute import SipRoute
 from SipHeader import SipHeader
 from datetime import datetime
-from hashlib import md5
+from md5 import md5
 from traceback import print_exc
 from time import time
 import sys, socket

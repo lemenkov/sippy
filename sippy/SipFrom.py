@@ -23,7 +23,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
 
 from random import random
-from hashlib import md5
+from md5 import md5
 from time import time
 from SipAddressHF import SipAddressHF
 from SipAddress import SipAddress
